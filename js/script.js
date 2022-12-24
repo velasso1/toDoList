@@ -9,7 +9,7 @@ const toDoData = [];
 
 window.onload = function () {
     alert('Страница загружена');
-    console.log(localStorage.getItem('data'));
+    console.log(JSON.parse(localStorage.getItem('data')));
 };
 
 const render = function () {

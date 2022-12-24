@@ -42,6 +42,8 @@ const render = function () {
     localStorage.setItem('data', JSON.stringify(toDoData));
 };
 
+render();
+
 
 const createNewItem = function (event) {
     event.preventDefault();

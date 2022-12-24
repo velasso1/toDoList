@@ -7,11 +7,16 @@ const todoCompleted = document.querySelector('.todo-completed');
 
 const toDoData = [];
 
+window.onload = function () {
+    alert('Страница загружена');
+    console.log(localStorage.getItem('data'));
+};
+
 const render = function () {
     todoList.innerHTML = '';
     todoCompleted.innerHTML = '';
     toDoData.forEach(function (item) {
-        // toDoItem
+
         const li = document.createElement('li');
         li.classList.add('todo-item');
 
@@ -27,24 +32,39 @@ const render = function () {
             todoList.append(li);
         }
 
+        localStorage.setItem('data', JSON.stringify(toDoData));
+
         li.querySelector('.todo-complete').addEventListener('click', function () {
             item.completed = !item.completed;
             render();
         });
 
+        li.querySelector('.todo-remove').addEventListener('click', () => {
+            toDoData.splice(toDoData.indexOf(item), 1);
+            li.remove();
+            render();
+        });
     });
 };
 
-todoControl.addEventListener('submit', function (event) {
+
+const createNewItem = function (event) {
     event.preventDefault();
 
-    const newToDo = {
-        text: headerInput.value,
-        completed: false,
-    };
+    if (headerInput.value === '') {
+        alert('Вы ничего не ввели');
+    } else {
 
-    toDoData.push(newToDo);
-    headerInput.value = '';
+        const newToDo = {
+            text: headerInput.value,
+            completed: false,
+        };
 
-    render();
-}); 
+        toDoData.push(newToDo);
+        headerInput.value = '';
+        render();
+    }
+
+};
+
+todoControl.addEventListener('submit', createNewItem);

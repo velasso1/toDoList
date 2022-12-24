@@ -42,9 +42,6 @@ const render = function () {
     localStorage.setItem('data', JSON.stringify(toDoData));
 };
 
-render();
-
-
 const createNewItem = function (event) {
     event.preventDefault();
 
@@ -63,5 +60,7 @@ const createNewItem = function (event) {
     }
 
 };
+
+render();
 
 todoControl.addEventListener('submit', createNewItem);

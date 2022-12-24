@@ -5,12 +5,7 @@ const headerInput = document.querySelector('.header-input');
 const todoList = document.querySelector('.todo-list');
 const todoCompleted = document.querySelector('.todo-completed');
 
-const toDoData = [];
-
-window.onload = function () {
-    alert('Страница загружена');
-    console.log(JSON.parse(localStorage.getItem('data')));
-};
+const toDoData = JSON.parse(localStorage.getItem('data')) || [];
 
 const render = function () {
     todoList.innerHTML = '';
@@ -32,8 +27,6 @@ const render = function () {
             todoList.append(li);
         }
 
-        localStorage.setItem('data', JSON.stringify(toDoData));
-
         li.querySelector('.todo-complete').addEventListener('click', function () {
             item.completed = !item.completed;
             render();
@@ -45,6 +38,8 @@ const render = function () {
             render();
         });
     });
+
+    localStorage.setItem('data', JSON.stringify(toDoData));
 };
 
 
